@@ -1,7 +1,7 @@
 - [x] @fanfeilong 开始
 - [x] @fanfeilong 使用二进制包
 - [ ] Building from Source Code
-- [ ] Sample Application
+- [ ] @NIGHT `Sample Application` $(Translate)+1
 - [ ] Important Concepts
  - [ ] C++ Wrapper
  - [x] @笨笨 `Processes`  $(Translate)+1
@@ -20,9 +20,9 @@
  - [x] @老细 `Message Loop Integration` $(Translate)+1
  - [x] @老细 `CefSettings` $(Translate)+1
  - [ ] CefBrowser and CefFrame
- - [ ] CefClient
- - [ ] Browser Life Span
- - [ ] Inter-Process Communication (IPC)
+ - [ ] @NIGHT `CefClient` $(Translate)+1
+ - [ ] @NIGHT `Browser Life Span` $(Translate)+1
+ - [x] @笨笨Inter-Process Communication (IPC)
  - [ ] Asynchronous JavaScript Bindings
  - [ ] Synchronous Requests
  - [ ] Browser-Independent Requests
