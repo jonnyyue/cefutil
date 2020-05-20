@@ -1,26 +1,53 @@
-CEF Util 货币 系统
-------------------
-CEF Util以文件+文件Task List的形式组织协调开发。每个文件`File` 对应一个`File Task List.md` 文件，上面列出了该文件的任务分割，每个开发者领取了任务时，自己在`FileName Task List.md`里 将自己的名字以 `@YourName` 添加到任务名词之前，完成第一次`Fork+Pull Request`后，会在该条目后面列出获得的cef货币，CEF货币是一种口头约定货币系统，根据任务的不同会发布不同的币种，比如翻译任务会发布`$(Translate)`币，该币可以用来在CEFUitl项目里发起悬赏翻译，或者可以用来在自己简历上列出，以表征自己在CEFUtil项目里的贡献。实际上，根据不同的任务，会有各种有趣的币被发布。
+CEF全称是Chromium Embedded Framework，它是Chromium的Content API的封装库。
 
-CEF 文档中文翻译任务
+- CEF官网地址：https://bitbucket.org/chromiumembedded/cef
+- CEF官方论坛：http://www.magpcss.org/ceforum
+- CEFSharp：https://github.com/cefsharp/CefSharp
+- ChromiumFX,.NET bindings for the Chromium Embedded Framework.: https://bitbucket.org/chromiumfx/chromiumfx
+
+## CEF 文档中文翻译任务
 --------------------
-- [`CEF General Usage`](https://github.com/fanfeilong/cefutil/blob/master/CEF%20General%20Usage.md)
-  [`CEF General Usage Task List`](https://github.com/fanfeilong/cefutil/blob/master/CEF%20General%20Usage%20Task%20List.md)
+- [x] [CEF General Usage](https://github.com/fanfeilong/cefutil/blob/master/doc/CEF%20General%20Usage.md)
+- [x] [CEF General Usage Task List](https://github.com/fanfeilong/cefutil/blob/master/doc/CEF%20General%20Usage%20Task%20List.md)
+- [x] [CEF General Usage中文版，欢迎查阅](https://github.com/fanfeilong/cefutil/blob/master/doc/CEF%20General%20Usage-zh-cn.md)
 
-
-CEF FAQ
+## CEF FAQ
 -------
+- [CEF 的关闭流程](https://github.com/fanfeilong/cefutil/blob/master/doc/CEF_Close.md)
+- [CEF 的C和C++封装](https://github.com/fanfeilong/cefutil/blob/master/doc/CEF_cpp2c_annotation.md)
+- [CEF 的JavaScript和C++跨语言交互](https://github.com/fanfeilong/cefutil/blob/master/doc/CEF_JavaScript_Cpp.md)
+- [Cef经典N大问题 by 扫地僧](http://blog.csdn.net/weolar/article/details/51994895)
 
-#### 如何做进程间同步通信
-参考CEF官方论坛的[这个帖子](http://www.magpcss.org/ceforum/viewtopic.php?f=6&t=10680)，尽量不要在CEF里做进程间同步通信，但如果你非要做。以下步骤是一个方案：
+## Chromium Documentations
+-----------------
+- [Chromium Generation Your Project](https://github.com/fanfeilong/cefutil/blob/master/doc/gyp.md)
+- [Chromium Resoures](https://github.com/fanfeilong/cefutil/blob/master/doc/chromium_resources.md)
+- [Chromium Content Register V8 Extension](https://github.com/fanfeilong/cefutil/blob/master/doc/content_register_v8_extension.md)
+- [Chromium GYP 中文翻译](https://github.com/fanfeilong/cefutil/blob/master/doc/gyp.pdf)
 
-1. Start the call in the Browser process by "SendMessage".
-2. In the BrowserProcess, configure a wait handle on an event until it gets signaled and wait.
-3. The Render process receives the sent message from the Browser process.
-4. The Render process calls the TryEval to execute the JavaScript.
-5. The return code of the evaluation is being sent back to the Browser process, marshaled into a CefProcessMessage.
-6. The Browser process receives the message, un-marshals the return code inside the message.
-7. The event object is being signaled.
-8. The Browser process returns to the caller the result of the JavaScript call.
+## CEF Build
+-----------------
+如果要编译CEF，则需要同步编译Chromium的最新源码
+- [Chromium Build Guid](https://github.com/fanfeilong/cefutil/blob/master/doc/chromium_build_guid.md)
+- [Chromium for developer](http://www.chromium.org/developers)
+- [windows build instructions](https://chromium.googlesource.com/chromium/src/+/master/docs/windows_build_instructions.md)
+  - depot_tool的官方地址被墙(一种深深的怨恨)，可以在github 里搜索depot tool 关键字搜索相关的克隆项目，例如：
+    - [depot tool](https://github.com/cybertk/depot_tools)
+  - google 官方开发的vs插件，专门为chromium源码提供的。[vs-chromium](https://github.com/chromium/vs-chromium)
+  - 同样的原因，depot_tool里内置的chromium的源码下载地址放在googleapi.com上，也是被墙的。下面这个地址里有chromium的所有项目的git地址：
+    - https://chromium.googlesource.com/?format=JSON
+    - https://chromium.googlesource.com/?format=TEXT
 
-如果是在Render进程首先发起调用，不要在CEFV8Handler的Execute里阻塞住执行流，参考CEF官方论坛的[这个使用Task的帖子](http://www.magpcss.org/ceforum/viewtopic.php?f=14&t=11132)。
+相关链接
+---------
+- [servo, the embeddable browser engine](http://blogs.s-osg.org/servo-the-embeddable-browser-engine/)
+
+- [geckoview](https://mozilla.github.io/geckoview/)
+Android offers a built-in WebView, which applications can hook into in order to display web pages within the context of their app. However, Android’s WebView is not really intended for building browsers, and hence, many advanced Web APIs are disabled. Furthermore, it is also a moving target: different phones might have different versions of WebView, all of which your app has to support.
+
+That is where GeckoView comes in. GeckoView is:
+
+* Full-featured: GeckoView is designed to expose the entire power of the Web to applications, and all that through a straightforward API. Think of it as harnessing the full power of Gecko (the engine that powers Firefox), while its API is WebView-like and easy to use.
+* Suited for apps and browsers: GeckoView is particularly suited for building mobile browsers, but it can be embedded as a web engine component in any kind of app.
+* Self-Contained: Because GeckoView is a standalone library that you bundle with your application, you can be confident that the code you test is the code that will actually run.
+* Standards Compliant: Like Firefox, GeckoView offers excellent support for modern Web standards.
